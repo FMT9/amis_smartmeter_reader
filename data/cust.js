@@ -189,7 +189,7 @@ function timeDecoderTS(timestamp) {
 
   // return dt.toLocaleString(); // output will vary based on system locale settings
 
-  return dt.getFullYear() + '/' + zeroPad(dt.getMonth()+1,2) + '/' + zeroPad(dt.getDate(),2) + '&nbsp;' +
+  return dt.getFullYear() + '-' + zeroPad(dt.getMonth()+1,2) + '-' + zeroPad(dt.getDate(),2) + '&nbsp;' +
          zeroPad(dt.getHours(),2) + ':' + zeroPad(dt.getMinutes(),2) + ':' + zeroPad(dt.getSeconds(),2);
 }
 
@@ -439,7 +439,7 @@ function updateElements(obj) {
         } else if (line.time) {
           // This is the "old" logfile format
           // we have the time of last received counter data
-          t = timeDecoderMbusCP48(line.time, false);
+          t = timeDecoderMbusCP48(line.time, false).replace(/\//g, '-');
         } else if (line.ms) {
           // we never have got any time - we just have the runtime
           t = runtimeTimeDecode(line.ms, true, false, false);
